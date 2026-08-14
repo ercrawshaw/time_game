@@ -1,0 +1,362 @@
+.cockpitPage {
+  position: relative;
+
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      #152c46 0%,
+      transparent 35%
+    ),
+    linear-gradient(
+      #020510,
+      #060b19
+    );
+}
+
+/* STARS */
+
+.cockpitStars {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    radial-gradient(
+      circle,
+      white 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle,
+      white 1px,
+      transparent 1px
+    );
+
+  background-size:
+    90px 90px,
+    140px 140px;
+
+  background-position:
+    0 0,
+    40px 60px;
+
+  opacity: 0.5;
+}
+
+/* MAIN CONSOLE */
+
+.cockpit {
+  position: relative;
+  z-index: 1;
+
+  width: min(1000px, 100%);
+
+  padding: 22px;
+
+  border: 8px solid #28343d;
+  border-radius: 35px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #53616b,
+      #202a31
+    );
+
+  box-shadow:
+    0 0 0 5px #111820,
+    0 25px 80px rgba(0, 0, 0, 0.8);
+}
+
+/* TOP BAR */
+
+.cockpitStatusBar {
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 15px;
+
+  border-radius: 12px;
+
+  background: #121a20;
+}
+
+.cockpitStatusLights {
+  display: flex;
+  gap: 10px;
+}
+
+.cockpitLight {
+  width: 12px;
+  height: 12px;
+
+  border-radius: 50%;
+}
+
+.cockpitLight.red {
+  background: #ff4b4b;
+  box-shadow: 0 0 8px #ff4b4b;
+}
+
+.cockpitLight.yellow {
+  background: #ffd84b;
+  box-shadow: 0 0 8px #ffd84b;
+}
+
+.cockpitLight.green {
+  background: #53ff80;
+  box-shadow: 0 0 8px #53ff80;
+}
+
+.cockpitStatusText {
+  margin-left: auto;
+
+  color: #9bffb0;
+
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+/* MAIN SCREEN */
+
+.cockpitScreen {
+  margin-top: 18px;
+
+  min-height: 520px;
+
+  padding: 40px;
+
+  border: 6px solid #111820;
+  border-radius: 22px;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.02) 2px,
+      transparent 2px,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle,
+      #173b4d,
+      #07141d
+    );
+
+  box-shadow:
+    inset 0 0 40px
+      rgba(47, 235, 255, 0.15),
+    0 0 20px
+      rgba(47, 235, 255, 0.15);
+}
+
+/* LOWER CONTROL AREA */
+
+.cockpitControls {
+  margin-top: 18px;
+
+  display: grid;
+  grid-template-columns:
+    1fr
+    120px
+    1fr;
+
+  gap: 20px;
+
+  align-items: center;
+}
+
+.cockpitControlPanel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px;
+
+  border: 3px solid #12191d;
+  border-radius: 12px;
+
+  background: #303b41;
+  color: #ccd7da;
+
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.cockpitSwitch {
+  width: 32px;
+  height: 16px;
+
+  border-radius: 10px;
+
+  background: #54ff7c;
+
+  box-shadow: 0 0 10px #54ff7c;
+}
+
+/* RADAR */
+
+.cockpitRadar {
+  position: relative;
+
+  width: 100px;
+  height: 100px;
+
+  margin: auto;
+
+  overflow: hidden;
+
+  border: 4px solid #0f171a;
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      transparent 49%,
+      rgba(84, 255, 124, 0.25) 50%,
+      transparent 51%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 49%,
+      rgba(84, 255, 124, 0.25) 50%,
+      transparent 51%
+    ),
+    #07150c;
+
+  box-shadow:
+    inset 0 0 20px
+      rgba(84, 255, 124, 0.3);
+}
+
+.cockpitRadarLine {
+  position: absolute;
+
+  left: 50%;
+  bottom: 50%;
+
+  width: 2px;
+  height: 47px;
+
+  background: #54ff7c;
+
+  transform-origin: bottom;
+
+  animation:
+    cockpitRadarSweep
+    3s linear infinite;
+
+  box-shadow: 0 0 8px #54ff7c;
+}
+
+.cockpitRadarDot {
+  position: absolute;
+
+  top: 28px;
+  right: 25px;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #54ff7c;
+
+  box-shadow: 0 0 8px #54ff7c;
+}
+
+@keyframes cockpitRadarSweep {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* LITTLE LIGHTS */
+
+.cockpitConsoleLights {
+  display: flex;
+  justify-content: center;
+
+  gap: 18px;
+
+  margin-top: 20px;
+}
+
+.cockpitConsoleLights span {
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #4bf578;
+
+  box-shadow: 0 0 7px #4bf578;
+}
+
+.cockpitConsoleLights span:nth-child(even) {
+  background: #47bfff;
+
+  box-shadow: 0 0 7px #47bfff;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .cockpitPage {
+    padding: 12px;
+  }
+
+  .cockpit {
+    padding: 13px;
+
+    border-width: 5px;
+  }
+
+  .cockpitScreen {
+    min-height: auto;
+
+    padding: 30px 15px;
+  }
+
+  .cockpitControls {
+    grid-template-columns:
+      1fr
+      80px
+      1fr;
+
+    gap: 8px;
+  }
+
+  .cockpitRadar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .cockpitRadarLine {
+    height: 32px;
+  }
+
+  .cockpitControlPanel {
+    padding: 10px;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    text-align: center;
+  }
+}
