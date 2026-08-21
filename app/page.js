@@ -1,10 +1,30 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
 import Cockpit from "./components/cockpit";
 
 export default function Home() {
   const router = useRouter();
+
+  const images = [
+    "/little-alien-1.png",
+    "/little-alien-2.png",
+    "/little-alien-3.png",
+  ];
+
+  const [imageIndex, setImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setImageIndex((currentIndex) => {
+        return (currentIndex + 1) % images.length;
+      });
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Cockpit>
@@ -22,7 +42,7 @@ export default function Home() {
 
         <div className="alien">
           <img
-            src="/little-alien.png"
+            src={images[imageIndex]}
             alt="Cute green alien"
             className="alienImage"
           />
