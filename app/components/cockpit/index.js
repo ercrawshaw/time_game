@@ -1,9 +1,19 @@
+import { useState } from "react";
 import "./index.css";
+import SettingsModal from "../settings-modal";
 
 export default function Cockpit({
   children,
   status = "SYSTEM ONLINE",
 }) {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if(isModalOpen) {
+    return <SettingsModal onClose={() => setIsModalOpen(false)} />
+  }
+
+
   return (
     <main className="cockpitPage">
       <div className="cockpitStars" />
@@ -22,15 +32,14 @@ export default function Cockpit({
             {status}
           </span>
 
-          <a href="/">
-            <img
-              src="/settings-icon.png"
-              alt="Home icon"
-              className="icon"
-            />
-          </a>
+            <button className="cockpitSettingsButton" onClick={() => setIsModalOpen(true)}>
+              <img
+                src="/settings-icon.png"
+                alt="Home icon"
+                className="icon"
+              />
+            </button>
 
-          
         </div>
 
         <div className="cockpitScreen">
