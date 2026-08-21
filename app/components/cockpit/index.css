@@ -260,6 +260,19 @@
   background: #54ff7c;
 
   box-shadow: 0 0 8px #54ff7c;
+  animation-name: blink;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+  0%, 100%{
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 @keyframes cockpitRadarSweep {
