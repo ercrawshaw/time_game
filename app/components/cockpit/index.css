@@ -92,31 +92,8 @@
   background: #121a20;
 }
 
-.cockpitStatusLights {
-  display: flex;
-  gap: 10px;
-}
-
-.cockpitLight {
-  width: 12px;
-  height: 12px;
-
-  border-radius: 50%;
-}
-
-.cockpitLight.red {
-  background: #ff4b4b;
-  box-shadow: 0 0 8px #ff4b4b;
-}
-
-.cockpitLight.yellow {
-  background: #ffd84b;
-  box-shadow: 0 0 8px #ffd84b;
-}
-
-.cockpitLight.green {
-  background: #53ff80;
-  box-shadow: 0 0 8px #53ff80;
+.icon {
+  height: 70px;
 }
 
 .cockpitStatusText {

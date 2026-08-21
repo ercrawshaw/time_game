@@ -10,15 +10,27 @@ export default function Cockpit({
 
       <section className="cockpit">
         <div className="cockpitStatusBar">
-          <div className="cockpitStatusLights">
-            <span className="cockpitLight red" />
-            <span className="cockpitLight yellow" />
-            <span className="cockpitLight green" />
-          </div>
-
+          <a href="/">
+            <img
+              src="/return-icon.png"
+              alt="Home icon"
+              className="icon"
+            />
+          </a>
+          
           <span className="cockpitStatusText">
             {status}
           </span>
+
+          <a href="/">
+            <img
+              src="/settings-icon.png"
+              alt="Home icon"
+              className="icon"
+            />
+          </a>
+
+          
         </div>
 
         <div className="cockpitScreen">
