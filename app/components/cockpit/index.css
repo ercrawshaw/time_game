@@ -105,6 +105,16 @@
   letter-spacing: 2px;
 }
 
+.cockpitSettingsButton {
+  all: unset;
+  cursor: pointer;
+}
+
+.cockpitSettingsButton:hover {
+  all: unset;
+  cursor: pointer;
+}
+
 /* MAIN SCREEN */
 
 .cockpitScreen {
