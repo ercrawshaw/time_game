@@ -105,12 +105,12 @@
   letter-spacing: 2px;
 }
 
-.cockpitSettingsButton {
+.soundButton {
   all: unset;
   cursor: pointer;
 }
 
-.cockpitSettingsButton:hover {
+.soundButton:hover {
   all: unset;
   cursor: pointer;
 }

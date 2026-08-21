@@ -1,18 +1,47 @@
-import { useState } from "react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import "./index.css";
-import SettingsModal from "../settings-modal";
 
 export default function Cockpit({
   children,
   status = "SYSTEM ONLINE",
 }) {
+  const [isSoundOn, setIsSoundOn] = useState(false);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const audioRef = useRef(null);
 
-  if(isModalOpen) {
-    return <SettingsModal onClose={() => setIsModalOpen(false)} />
-  }
+  const audioIcon = isSoundOn
+    ? "/images/sound.png"
+    : "/images/no-sound.png";
 
+  useEffect(() => {
+    audioRef.current = new Audio(
+      "/audio/radar-beeping-sound.mp3"
+    );
+
+    audioRef.current.loop = true;
+
+    return () => {
+      audioRef.current?.pause();
+      audioRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    if (!audio) {
+      return;
+    }
+
+    if (isSoundOn) {
+      audio.play();
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  }, [isSoundOn]);
 
   return (
     <main className="cockpitPage">
@@ -22,24 +51,32 @@ export default function Cockpit({
         <div className="cockpitStatusBar">
           <a href="/">
             <img
-              src="/return-icon.png"
-              alt="Home icon"
+              src="/images/return-icon.png"
+              alt="Home"
               className="icon"
             />
           </a>
-          
+
           <span className="cockpitStatusText">
             {status}
           </span>
 
-            <button className="cockpitSettingsButton" onClick={() => setIsModalOpen(true)}>
-              <img
-                src="/settings-icon.png"
-                alt="Home icon"
-                className="icon"
-              />
-            </button>
-
+          <button
+            className="soundButton"
+            onClick={() =>
+              setIsSoundOn((current) => !current)
+            }
+          >
+            <img
+              src={audioIcon}
+              alt={
+                isSoundOn
+                  ? "Turn sound off"
+                  : "Turn sound on"
+              }
+              className="icon"
+            />
+          </button>
         </div>
 
         <div className="cockpitScreen">

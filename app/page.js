@@ -9,9 +9,9 @@ export default function Home() {
   const router = useRouter();
 
   const images = [
-    "/little-alien-1.png",
-    "/little-alien-2.png",
-    "/little-alien-3.png",
+    "/images/little-alien-1.png",
+    "/images/little-alien-2.png",
+    "/images/little-alien-3.png",
   ];
 
   const [imageIndex, setImageIndex] = useState(0);
