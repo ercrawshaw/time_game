@@ -1,0 +1,72 @@
+.clockWrapper {
+  display: flex;
+
+  justify-content: center;
+
+  margin: 15px auto 35px;
+}
+
+.analogClock {
+  width: min(370px, 80vw);
+
+  height: auto;
+
+  filter:
+    drop-shadow(
+      0 0 12px rgba(98, 234, 248, 0.5)
+    );
+}
+
+.clockFace {
+  fill: #f5fbfc;
+
+  stroke: #62eaf8;
+
+  stroke-width: 8;
+}
+
+.hourMarker {
+  stroke: #14232b;
+
+  stroke-width: 4;
+
+  stroke-linecap: round;
+}
+
+.minuteMarker {
+  stroke: #63747c;
+
+  stroke-width: 1.5;
+}
+
+.clockNumber {
+  fill: #13242c;
+
+  font-size: 22px;
+
+  font-weight: 800;
+}
+
+.hourHand {
+  stroke: #13242c;
+
+  stroke-width: 11;
+
+  stroke-linecap: round;
+}
+
+.minuteHand {
+  stroke: #13242c;
+
+  stroke-width: 7;
+
+  stroke-linecap: round;
+}
+
+.clockCentre {
+  fill: #54ff7c;
+
+  stroke: #13242c;
+
+  stroke-width: 3;
+}

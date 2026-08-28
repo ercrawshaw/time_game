@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+
 import "./index.css";
 
 export default function Cockpit({
@@ -86,6 +87,7 @@ export default function Cockpit({
         <div className="cockpitControls">
           <div className="cockpitControlPanel">
             <span>POWER</span>
+
             <div className="cockpitSwitch" />
           </div>
 
@@ -96,6 +98,7 @@ export default function Cockpit({
 
           <div className="cockpitControlPanel">
             <span>TIME DRIVE</span>
+
             <div className="cockpitSwitch" />
           </div>
         </div>
