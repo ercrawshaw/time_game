@@ -409,14 +409,13 @@ button:disabled {
       rgba(84, 255, 124, 0.5);
 }
 
-.wrongAnswer {
-  border-color: #ff6262;
-
-  background: #401d25;
-
-  box-shadow:
-    0 0 18px
-      rgba(255, 98, 98, 0.35);
+.wrongAttempt {
+  border-color: #56636a;
+  background: #202a30;
+  color: #7f8d92;
+  opacity: 0.55;
+  box-shadow: none;
+  transform: none;
 }
 
 /* RESULT */

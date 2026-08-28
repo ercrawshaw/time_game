@@ -1,71 +1,54 @@
 "use client";
+import playSound from "../utils/audio/play-sound";
+import { useMemo, useState } from "react";
 
-import {
-  Suspense,
-  useMemo,
-  useState,
-} from "react";
-
-import { useSearchParams } from "next/navigation";
+import { useAppContext } from "../context";
 
 import Clock from "../components/clock";
 import Cockpit from "../components/cockpit";
 
 import createQuestion from "../utils/game/create-question";
 
-function Game() {
-  const searchParams = useSearchParams();
-
-  const timeType =
-    searchParams.get("timeType") ||
-    "analog";
-
-  const difficulty =
-    searchParams.get("difficulty") ||
-    "hour";
-
-  const [
-    questionNumber,
-    setQuestionNumber,
-  ] = useState(1);
-
-  const [
-    selectedAnswer,
-    setSelectedAnswer,
-  ] = useState(null);
-
-  const [
-    hasAnswered,
-    setHasAnswered,
-  ] = useState(false);
+export default function GamePage() {
+  const {timeType, difficulty, isSoundOn} = useAppContext();
+  const [questionNumber,setQuestionNumber] = useState(1);
+  const [wrongAnswers,setWrongAnswers] = useState([]);
+  const [message,setMessage] = useState("");
 
   const question = useMemo(() => {
-    return createQuestion(
-      difficulty,
-      timeType
-    );
-  }, [
-    difficulty,
-    timeType,
-    questionNumber,
-  ]);
-
-  const chooseAnswer = (answer) => {
-    if (hasAnswered) {
-      return;
-    }
-
-    setSelectedAnswer(answer.value);
-    setHasAnswered(true);
-  };
+    return createQuestion(difficulty, timeType);
+  }, [difficulty, timeType, questionNumber]);
 
   const nextQuestion = () => {
-    setSelectedAnswer(null);
-    setHasAnswered(false);
+    setWrongAnswers([]);
+    setMessage("");
 
     setQuestionNumber(
       (current) => current + 1
     );
+  };
+
+  const chooseAnswer = (answer) => {
+    const isCorrect = answer.value === question.correctAnswer;
+
+    if (isCorrect) {
+      if (isSoundOn) playSound("/audio/correct.mp3");
+
+      setTimeout(() => {
+        nextQuestion();
+      }, 1200);
+
+      return;
+    }
+
+    setWrongAnswers((current) => [
+      ...current,
+      answer.value,
+    ]);
+
+    setMessage("NOT QUITE — TRY AGAIN");
+    if (isSoundOn) playSound("/audio/wrong.mp3");
+
   };
 
   return (
@@ -83,94 +66,49 @@ function Game() {
 
         <Clock
           hour={question.correctTime.hour}
-          minute={
-            question.correctTime.minute
-          }
+          minute={question.correctTime.minute}
         />
 
         <div className="answerGrid">
-          {question.answers.map(
-            (answer) => {
-              const isSelected =
-                selectedAnswer ===
-                answer.value;
-
-              const isCorrect =
-                answer.value ===
-                question.correctAnswer;
-
-              let className =
-                "answerButton";
-
-              if (
-                hasAnswered &&
-                isCorrect
-              ) {
-                className +=
-                  " correctAnswer";
-              }
-
-              if (
-                hasAnswered &&
-                isSelected &&
-                !isCorrect
-              ) {
-                className +=
-                  " wrongAnswer";
-              }
-
-              return (
-                <button
-                  key={`${answer.value}-${answer.label}`}
-                  className={className}
-                  onClick={() =>
-                    chooseAnswer(answer)
-                  }
-                >
-                  {answer.label}
-                </button>
+          {question.answers.map((answer) => {
+            const isWrong =
+              wrongAnswers.includes(
+                answer.value
               );
-            }
-          )}
+
+            const className = isWrong
+              ? "answerButton wrongAttempt"
+              : "answerButton";
+
+            return (
+              <button
+                key={`${answer.value}-${answer.label}`}
+                className={className}
+                disabled={isWrong}
+                onClick={() =>
+                  chooseAnswer(answer)
+                }
+              >
+                {answer.label}
+              </button>
+            );
+          })}
         </div>
 
-        {hasAnswered && (
+        {message && (
           <div className="resultArea">
             <p
               className={
-                selectedAnswer ===
-                question.correctAnswer
+                message === "MISSION SUCCESS!"
                   ? "correctMessage"
                   : "wrongMessage"
               }
             >
-              {selectedAnswer ===
-              question.correctAnswer
-                ? "MISSION SUCCESS!"
-                : "NOT QUITE — CHECK THE CLOCK AGAIN!"}
+              {message}
             </p>
-
-            <button
-              className="startButton"
-              onClick={nextQuestion}
-            >
-              NEXT CLOCK
-            </button>
           </div>
         )}
       </div>
     </Cockpit>
-  );
-}
-
-export default function GamePage() {
-  return (
-    <Suspense
-      fallback={
-        <main className="gameSpace" />
-      }
-    >
-      <Game />
-    </Suspense>
   );
 }

@@ -1,45 +1,27 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { useAppContext } from "../context";
 import Cockpit from "../components/cockpit";
 
-import {
-  DIFFICULTIES,
-  TIME_TYPES,
-} from "./config";
+import { DIFFICULTIES, TIME_TYPES } from "./config";
 
 export default function OptionsPage() {
   const router = useRouter();
 
-  const [
-    selectedTimeType,
-    setSelectedTimeType,
-  ] = useState(null);
+  const {
+    timeType,
+    setTimeType,
+    difficulty,
+    setDifficulty,
+  } = useAppContext();
 
-  const [
-    selectedDifficulty,
-    setSelectedDifficulty,
-  ] = useState(null);
-
-  const canStart =
-    selectedTimeType &&
-    selectedDifficulty;
+  const canStart = timeType && difficulty;
 
   const startGame = () => {
-    if (!canStart) {
-      return;
-    }
-
-    const params = new URLSearchParams({
-      timeType: selectedTimeType,
-      difficulty: selectedDifficulty,
-    });
-
-    router.push(
-      `/game?${params.toString()}`
-    );
+    if (!canStart) return;
+    router.push("/game");
   };
 
   return (
@@ -67,15 +49,12 @@ export default function OptionsPage() {
                 key={option.value}
                 type="button"
                 className={`optionCard ${
-                  selectedTimeType ===
-                  option.value
+                  timeType === option.value
                     ? "selected"
                     : ""
                 }`}
                 onClick={() =>
-                  setSelectedTimeType(
-                    option.value
-                  )
+                  setTimeType(option.value)
                 }
               >
                 <span className="optionIcon">
@@ -97,15 +76,12 @@ export default function OptionsPage() {
                 key={option.value}
                 type="button"
                 className={`optionCard difficultyCard ${
-                  selectedDifficulty ===
-                  option.value
+                  difficulty === option.value
                     ? "selected"
                     : ""
                 }`}
                 onClick={() =>
-                  setSelectedDifficulty(
-                    option.value
-                  )
+                  setDifficulty(option.value)
                 }
               >
                 <span>{option.label}</span>

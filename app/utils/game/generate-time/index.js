@@ -1,10 +1,8 @@
 import randomNumber from "../../common/random-number";
 
-export default function generateTime(
-  difficulty
-) {
+export default function generateTime( difficulty ) {
+  
   const hour = randomNumber(1, 12);
-
   let minutes;
 
   switch (difficulty) {

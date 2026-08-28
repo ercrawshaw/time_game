@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useSound } from "../../context/sound";
+import { useAppContext } from "../../context";
 
 import "./index.css";
 
@@ -11,7 +11,7 @@ export default function Cockpit({
 }) {
 
   const audioRef = useRef(null);
-  const { isSoundOn, toggleSound } = useSound();
+  const { isSoundOn, toggleSound } = useAppContext();
 
   const audioIcon = isSoundOn
     ? "/images/sound.png"

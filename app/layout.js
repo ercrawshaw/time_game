@@ -1,5 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import { SoundProvider } from "./context/sound";
+import { AppProvider } from "./context";
 
 import "./globals.css";
 
@@ -27,9 +27,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body>
-        <SoundProvider>
+        <AppProvider>
           {children}
-        </SoundProvider>
+        </AppProvider>
       </body>
     </html>
   );
