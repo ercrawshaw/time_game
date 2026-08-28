@@ -2,15 +2,9 @@ import { formatDigitalTime } from "../../utils/time/format-time";
 
 import "./index.css";
 
-export default function Clock({
-  hour,
-  minute,
-}) {
+export default function Clock({ hour, minute }) {
   const minuteAngle = minute * 6;
-
-  const hourAngle =
-    (hour % 12) * 30 +
-    minute * 0.5;
+  const hourAngle = (hour % 12) * 30 + minute * 0.5;
 
   return (
     <div className="clockWrapper">

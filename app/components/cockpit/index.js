@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useSound } from "../../context/sound";
 
 import "./index.css";
 
@@ -8,9 +9,9 @@ export default function Cockpit({
   children,
   status = "SYSTEM ONLINE",
 }) {
-  const [isSoundOn, setIsSoundOn] = useState(false);
 
   const audioRef = useRef(null);
+  const { isSoundOn, toggleSound } = useSound();
 
   const audioIcon = isSoundOn
     ? "/images/sound.png"
@@ -64,9 +65,7 @@ export default function Cockpit({
 
           <button
             className="soundButton"
-            onClick={() =>
-              setIsSoundOn((current) => !current)
-            }
+            onClick={() => {toggleSound()}}
           >
             <img
               src={audioIcon}
