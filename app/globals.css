@@ -347,6 +347,24 @@ button:disabled {
   text-align: center;
 }
 
+.clockTransition {
+  animation: questionBlink 0.45s ease-in-out;
+}
+
+@keyframes questionBlink {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 /* ANSWERS */
 
 .answerGrid {
@@ -359,6 +377,8 @@ button:disabled {
   max-width: 700px;
 
   margin: 0 auto;
+
+  animation: questionBlink 0.75s ease-in-out;
 }
 
 .answerButton {

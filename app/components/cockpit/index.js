@@ -86,8 +86,8 @@ export default function Cockpit({
         <div className="cockpitControls">
           <div className="cockpitControlPanel">
             <span>POWER</span>
-            <h3 className="scoreDisplay">{score}</h3>
-            {/* <div className="cockpitSwitch" /> */}
+            {score > 0 ? (<h3 className="scoreDisplay">{score}</h3>) :
+            (<div className="cockpitSwitch" />) }
           </div>
 
           <div className="cockpitRadar">

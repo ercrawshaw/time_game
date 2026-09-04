@@ -1,16 +1,12 @@
 .clockWrapper {
   display: flex;
-
   justify-content: center;
-
-  margin: 15px auto 35px;
+  margin: 10px auto 25px;
 }
 
 .analogClock {
   width: min(370px, 80vw);
-
   height: auto;
-
   filter:
     drop-shadow(
       0 0 12px rgba(98, 234, 248, 0.5)

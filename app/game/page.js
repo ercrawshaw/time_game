@@ -1,6 +1,6 @@
 "use client";
 import playSound from "../utils/audio/play-sound";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 
 import { useAppContext } from "../context";
 
@@ -14,6 +14,7 @@ export default function GamePage() {
   const [questionNumber,setQuestionNumber] = useState(1);
   const [wrongAnswers,setWrongAnswers] = useState([]);
   const [message,setMessage] = useState("");
+  const [wrongAttempts, setWrongAttempts] = useState(0);
 
   const question = useMemo(() => {
     return createQuestion(difficulty, timeType);
@@ -21,6 +22,7 @@ export default function GamePage() {
 
   const nextQuestion = () => {
     setWrongAnswers([]);
+    setWrongAttempts(0);
     setMessage("");
 
     setQuestionNumber(
@@ -37,7 +39,7 @@ export default function GamePage() {
 
       setTimeout(() => {
         nextQuestion();
-      }, 10);
+      }, 50);
 
       return;
     }
@@ -47,10 +49,26 @@ export default function GamePage() {
       answer.value,
     ]);
 
-    setMessage("NOT QUITE — TRY AGAIN");
-    if (isSoundOn) playSound("/audio/wrong.mp3");
+    setWrongAttempts((current) => current + 1);
+
+    if (wrongAttempts >=2) {
+      if (isSoundOn) playSound("/audio/wrong.mp3");
+      nextQuestion();
+    } else {
+      setMessage("NOT QUITE — TRY AGAIN");
+      if (isSoundOn) playSound("/audio/wrong.mp3");
+    }
 
   };
+
+  const gameContentRef = useRef(null);
+
+  useEffect(() => {
+    gameContentRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
+  }, []);
 
   return (
     <Cockpit
@@ -65,12 +83,21 @@ export default function GamePage() {
           WHAT TIME IS IT?
         </h1>
 
-        <Clock
-          hour={question.correctTime.hour}
-          minute={question.correctTime.minute}
-        />
+        <div ref={gameContentRef} />
+        <div
+          key={`clock-${questionNumber}`}
+          className="clockTransition"
+        >
+          <Clock
+            hour={question.correctTime.hour}
+            minute={question.correctTime.minute}
+          />
+        </div>
 
-        <div className="answerGrid">
+        <div
+          key={questionNumber}
+          className="answerGrid"
+        >
           {question.answers.map((answer) => {
             const isWrong =
               wrongAnswers.includes(
