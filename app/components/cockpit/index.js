@@ -11,7 +11,7 @@ export default function Cockpit({
 }) {
 
   const audioRef = useRef(null);
-  const { isSoundOn, toggleSound } = useAppContext();
+  const { isSoundOn, toggleSound, score } = useAppContext();
 
   const audioIcon = isSoundOn
     ? "/images/sound.png"
@@ -86,8 +86,8 @@ export default function Cockpit({
         <div className="cockpitControls">
           <div className="cockpitControlPanel">
             <span>POWER</span>
-
-            <div className="cockpitSwitch" />
+            <h3 className="scoreDisplay">{score}</h3>
+            {/* <div className="cockpitSwitch" /> */}
           </div>
 
           <div className="cockpitRadar">

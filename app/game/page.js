@@ -10,7 +10,7 @@ import Cockpit from "../components/cockpit";
 import createQuestion from "../utils/game/create-question";
 
 export default function GamePage() {
-  const {timeType, difficulty, isSoundOn} = useAppContext();
+  const {timeType, difficulty, isSoundOn, addPoint} = useAppContext();
   const [questionNumber,setQuestionNumber] = useState(1);
   const [wrongAnswers,setWrongAnswers] = useState([]);
   const [message,setMessage] = useState("");
@@ -33,6 +33,7 @@ export default function GamePage() {
 
     if (isCorrect) {
       if (isSoundOn) playSound("/audio/correct.mp3");
+      addPoint();
 
       setTimeout(() => {
         nextQuestion();

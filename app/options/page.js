@@ -15,12 +15,17 @@ export default function OptionsPage() {
     setTimeType,
     difficulty,
     setDifficulty,
+    score,
+    resetScore,
+    addPoint,
   } = useAppContext();
 
   const canStart = timeType && difficulty;
 
   const startGame = () => {
     if (!canStart) return;
+
+    resetScore();
     router.push("/game");
   };
 
