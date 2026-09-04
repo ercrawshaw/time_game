@@ -7,7 +7,7 @@ import generateWrongTimes from "../generate-wrong-time";
 export default function createQuestion( difficulty, timeType) {
   
   const correctTime = generateTime(difficulty);
-  const wrongTimes = generateWrongTimes(correctTime, difficulty, 4);
+  const wrongTimes = generateWrongTimes(correctTime, difficulty, 3);
 
   const allTimes = shuffle([ correctTime, ...wrongTimes ]);
 

@@ -386,16 +386,6 @@ button:disabled {
     box-shadow 0.15s ease;
 }
 
-.answerButton:last-child {
-  grid-column: 1 / -1;
-
-  max-width: 340px;
-
-  width: 100%;
-
-  justify-self: center;
-}
-
 .answerButton:hover {
   transform: translateY(-2px);
 
@@ -456,9 +446,4 @@ button:disabled {
     grid-template-columns: 1fr;
   }
 
-  .answerButton:last-child {
-    grid-column: auto;
-
-    max-width: none;
-  }
 }
