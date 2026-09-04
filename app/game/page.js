@@ -36,7 +36,7 @@ export default function GamePage() {
 
       setTimeout(() => {
         nextQuestion();
-      }, 1200);
+      }, 10);
 
       return;
     }

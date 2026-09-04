@@ -38,7 +38,7 @@ export default function Cockpit({
     }
 
     if (isSoundOn) {
-      audio.play();
+      audio.play().catch(() => {});
     } else {
       audio.pause();
       audio.currentTime = 0;
