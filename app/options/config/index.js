@@ -38,3 +38,21 @@ export const DIFFICULTIES = [
     example: "3:27",
   },
 ];
+
+export const TIME_LIMITS = [
+  {
+    label: "1 Minute",
+    value: 60000,
+    icon: "⏳",
+  },
+  {
+    label: "2 Minutes",
+    value: 120000,
+    icon: "⏳",
+  },
+  {
+    label: "5 Minutes",
+    value: 300000,
+    icon: "⏳",
+  },
+];

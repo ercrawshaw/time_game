@@ -7,7 +7,9 @@ export function AppProvider({ children }) {
     const [isSoundOn, setIsSoundOn] = useState(false);
     const [timeType, setTimeType] = useState(null);
     const [difficulty, setDifficulty] = useState(null);
+    const [timeLimit, setTimeLimit] = useState(null);
     const [score, setScore] = useState(0);
+    const [timeUp, setTimeUp] = useState(false);
 
   const toggleSound = () => {
     setIsSoundOn((current) => !current);
@@ -22,7 +24,20 @@ export function AppProvider({ children }) {
   };
 
   return (
-    <AppContext.Provider value={{ isSoundOn, toggleSound, timeType, setTimeType, difficulty, setDifficulty, score, resetScore, addPoint }}>
+    <AppContext.Provider value={{ 
+      isSoundOn, 
+      toggleSound, 
+      timeType, 
+      setTimeType, 
+      difficulty, 
+      setDifficulty, 
+      timeLimit,
+      setTimeLimit,
+      score, 
+      resetScore, 
+      addPoint, 
+      timeUp, 
+      setTimeUp }}>
       {children}
     </AppContext.Provider>
   );

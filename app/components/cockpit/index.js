@@ -2,16 +2,23 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "../../context";
+import Countdown from 'react-countdown';
 
 import "./index.css";
 
 export default function Cockpit({
   children,
   status = "SYSTEM ONLINE",
+  showCountdown = false,
 }) {
 
   const audioRef = useRef(null);
-  const { isSoundOn, toggleSound, score } = useAppContext();
+  const { isSoundOn, toggleSound, score, timeLimit, setTimeUp } = useAppContext();
+
+  // fixed once on mount so re-renders don't restart the countdown
+  const [countdownEnd] = useState(() => Date.now() + (timeLimit ?? 0));
+
+  const showTimer = showCountdown && Boolean(timeLimit);
 
   const audioIcon = isSoundOn
     ? "/images/sound.png"
@@ -97,7 +104,31 @@ export default function Cockpit({
 
           <div className="cockpitControlPanel">
             <span>TIME DRIVE</span>
-
+            {showTimer ? (
+              <Countdown
+                date={countdownEnd}
+                onComplete={() => setTimeUp(true)}
+                renderer={({ minutes, seconds, total }) => (
+                  <span
+                    className={
+                      total <= 10000
+                        ? "countdownDisplay countdownCritical"
+                        : "countdownDisplay"
+                    }
+                  >
+                    {String(minutes).padStart(2, "0")}
+                    <span className="countdownColon">:</span>
+                    {String(seconds).padStart(2, "0")}
+                  </span>
+                )}
+              />
+            ) : (
+              showCountdown && (
+                <span className="countdownDisplay countdownUnlimited">
+                  ∞
+                </span>
+              )
+            )}
             <div className="cockpitSwitch" />
           </div>
         </div>

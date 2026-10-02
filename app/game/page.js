@@ -1,16 +1,29 @@
 "use client";
 import playSound from "../utils/audio/play-sound";
 import { useMemo, useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 import { useAppContext } from "../context";
 
 import Clock from "../components/clock";
 import Cockpit from "../components/cockpit";
+import MissionResult from "../components/mission-result";
 
 import createQuestion from "../utils/game/create-question";
 
 export default function GamePage() {
-  const {timeType, difficulty, isSoundOn, addPoint} = useAppContext();
+  const router = useRouter();
+  const {
+    timeType,
+    difficulty,
+    isSoundOn,
+    addPoint,
+    score,
+    resetScore,
+    timeLimit,
+    timeUp,
+    setTimeUp,
+  } = useAppContext();
   const [questionNumber,setQuestionNumber] = useState(1);
   const [wrongAnswers,setWrongAnswers] = useState([]);
   const [message,setMessage] = useState("");
@@ -70,9 +83,30 @@ export default function GamePage() {
     })
   }, []);
 
+  const playAgain = () => {
+    resetScore();
+    setTimeUp(false);
+    router.push("/options");
+  };
+
+  if (timeUp) {
+    return (
+      <Cockpit status="MISSION COMPLETE">
+        <MissionResult
+          score={score}
+          timeLimit={
+            timeLimit ? timeLimit / 1000 : null
+          }
+          onPlayAgain={playAgain}
+        />
+      </Cockpit>
+    );
+  }
+
   return (
     <Cockpit
       status={`QUESTION ${questionNumber}`}
+      showCountdown
     >
       <div className="gameContent">
         <p className="screenLabel">
@@ -134,6 +168,17 @@ export default function GamePage() {
             >
               {message}
             </p>
+          </div>
+        )}
+
+        {!timeLimit && (
+          <div className="endMissionArea">
+            <button
+              type="button"
+              onClick={() => setTimeUp(true)}
+            >
+              END MISSION
+            </button>
           </div>
         )}
       </div>

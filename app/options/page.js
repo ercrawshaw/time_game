@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAppContext } from "../context";
 import Cockpit from "../components/cockpit";
 
-import { DIFFICULTIES, TIME_TYPES } from "./config";
+import { DIFFICULTIES, TIME_TYPES, TIME_LIMITS } from "./config";
 
 export default function OptionsPage() {
   const router = useRouter();
@@ -15,17 +15,28 @@ export default function OptionsPage() {
     setTimeType,
     difficulty,
     setDifficulty,
+    timeLimit,
+    setTimeLimit,
     score,
     resetScore,
     addPoint,
+    setTimeUp,
   } = useAppContext();
 
   const canStart = timeType && difficulty;
+
+  const chooseTimeLimit = (value) => {
+    // clicking the active card clears it, which means no time limit
+    setTimeLimit((current) =>
+      current === value ? null : value
+    );
+  };
 
   const startGame = () => {
     if (!canStart) return;
 
     resetScore();
+    setTimeUp(false);
     router.push("/game");
   };
 
@@ -53,6 +64,7 @@ export default function OptionsPage() {
               <button
                 key={option.value}
                 type="button"
+                aria-pressed={timeType === option.value}
                 className={`optionCard ${
                   timeType === option.value
                     ? "selected"
@@ -80,6 +92,7 @@ export default function OptionsPage() {
               <button
                 key={option.value}
                 type="button"
+                aria-pressed={difficulty === option.value}
                 className={`optionCard difficultyCard ${
                   difficulty === option.value
                     ? "selected"
@@ -94,6 +107,40 @@ export default function OptionsPage() {
                 <span className="optionExample">
                   {option.example}
                 </span>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <section className="optionSection">
+          <h2>3. Choose your time limit</h2>
+
+          <p className="optionHint">
+            Optional — leave unselected for
+            unlimited time, or tap again to
+            clear.
+          </p>
+
+          <div className="optionGrid timeLimitGrid">
+            {TIME_LIMITS.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                aria-pressed={timeLimit === option.value}
+                className={`optionCard ${
+                  timeLimit === option.value
+                    ? "selected"
+                    : ""
+                }`}
+                onClick={() =>
+                  chooseTimeLimit(option.value)
+                }
+              >
+                <span className="optionIcon">
+                  {option.icon}
+                </span>
+
+                <span>{option.label}</span>
               </button>
             ))}
           </div>
