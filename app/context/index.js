@@ -2,6 +2,7 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
   useState,
 } from "react";
@@ -24,10 +25,17 @@ export function AppProvider({ children }) {
     setScore((current) => current + 1);
   };
 
-  const resetGame = () => {
+  const resetGame = useCallback(() => {
     setScore(0);
     setTimeUp(false);
-  };
+  }, []);
+
+  const resetMission = useCallback(() => {
+    resetGame();
+    setTimeType(null);
+    setDifficulty(null);
+    setTimeLimit(null);
+  }, [resetGame]);
 
   return (
     <AppContext.Provider
@@ -45,6 +53,7 @@ export function AppProvider({ children }) {
         timeUp,
         setTimeUp,
         resetGame,
+        resetMission,
       }}
     >
       {children}

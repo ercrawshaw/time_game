@@ -1,6 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+
+import { useAppContext } from "./context";
 
 import Alien from "./components/alien";
 import Cockpit from "./components/cockpit";
@@ -9,6 +12,12 @@ import "./home.css";
 
 export default function Home() {
   const router = useRouter();
+  const { resetMission } = useAppContext();
+
+  // landing on home clears any mission in progress
+  useEffect(() => {
+    resetMission();
+  }, [resetMission]);
 
   return (
     <Cockpit>
