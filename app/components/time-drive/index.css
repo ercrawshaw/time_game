@@ -1,0 +1,60 @@
+.countdownDisplay {
+  font-family: "Digital Space", sans-serif;
+  font-size: 34px;
+  letter-spacing: 3px;
+
+  color: #54ff7c;
+
+  text-shadow:
+    0 0 6px #54ff7c,
+    0 0 18px rgba(84, 255, 124, 0.6);
+}
+
+.countdownColon {
+  animation: countdownBlink 1s steps(1) infinite;
+}
+
+.countdownUnlimited {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.countdownCritical {
+  color: #ff5470;
+
+  text-shadow:
+    0 0 6px #ff5470,
+    0 0 18px rgba(255, 84, 112, 0.6);
+
+  animation: countdownPulse 0.6s ease-in-out infinite;
+}
+
+@keyframes countdownBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes countdownPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@media (max-width: 600px) {
+  .countdownDisplay {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
+}

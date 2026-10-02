@@ -3,9 +3,16 @@
 import { useRouter } from "next/navigation";
 
 import { useAppContext } from "../context";
-import Cockpit from "../components/cockpit";
+import {
+  DIFFICULTIES,
+  TIME_LIMITS,
+  TIME_TYPES,
+} from "../config/options";
 
-import { DIFFICULTIES, TIME_TYPES, TIME_LIMITS } from "./config";
+import Cockpit from "../components/cockpit";
+import OptionCard from "../components/option-card";
+
+import "./index.css";
 
 export default function OptionsPage() {
   const router = useRouter();
@@ -17,10 +24,7 @@ export default function OptionsPage() {
     setDifficulty,
     timeLimit,
     setTimeLimit,
-    score,
-    resetScore,
-    addPoint,
-    setTimeUp,
+    resetGame,
   } = useAppContext();
 
   const canStart = timeType && difficulty;
@@ -35,8 +39,7 @@ export default function OptionsPage() {
   const startGame = () => {
     if (!canStart) return;
 
-    resetScore();
-    setTimeUp(false);
+    resetGame();
     router.push("/game");
   };
 
@@ -61,25 +64,17 @@ export default function OptionsPage() {
 
           <div className="optionGrid timeTypeGrid">
             {TIME_TYPES.map((option) => (
-              <button
+              <OptionCard
                 key={option.value}
-                type="button"
-                aria-pressed={timeType === option.value}
-                className={`optionCard ${
+                icon={option.icon}
+                label={option.label}
+                selected={
                   timeType === option.value
-                    ? "selected"
-                    : ""
-                }`}
-                onClick={() =>
+                }
+                onSelect={() =>
                   setTimeType(option.value)
                 }
-              >
-                <span className="optionIcon">
-                  {option.icon}
-                </span>
-
-                <span>{option.label}</span>
-              </button>
+              />
             ))}
           </div>
         </section>
@@ -89,25 +84,18 @@ export default function OptionsPage() {
 
           <div className="optionGrid difficultyGrid">
             {DIFFICULTIES.map((option) => (
-              <button
+              <OptionCard
                 key={option.value}
-                type="button"
-                aria-pressed={difficulty === option.value}
-                className={`optionCard difficultyCard ${
+                className="difficultyCard"
+                label={option.label}
+                example={option.example}
+                selected={
                   difficulty === option.value
-                    ? "selected"
-                    : ""
-                }`}
-                onClick={() =>
+                }
+                onSelect={() =>
                   setDifficulty(option.value)
                 }
-              >
-                <span>{option.label}</span>
-
-                <span className="optionExample">
-                  {option.example}
-                </span>
-              </button>
+              />
             ))}
           </div>
         </section>
@@ -123,25 +111,17 @@ export default function OptionsPage() {
 
           <div className="optionGrid timeLimitGrid">
             {TIME_LIMITS.map((option) => (
-              <button
+              <OptionCard
                 key={option.value}
-                type="button"
-                aria-pressed={timeLimit === option.value}
-                className={`optionCard ${
+                icon={option.icon}
+                label={option.label}
+                selected={
                   timeLimit === option.value
-                    ? "selected"
-                    : ""
-                }`}
-                onClick={() =>
+                }
+                onSelect={() =>
                   chooseTimeLimit(option.value)
                 }
-              >
-                <span className="optionIcon">
-                  {option.icon}
-                </span>
-
-                <span>{option.label}</span>
-              </button>
+              />
             ))}
           </div>
         </section>

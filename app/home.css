@@ -1,0 +1,13 @@
+.homeContent {
+  text-align: center;
+}
+
+.missionText {
+  max-width: 470px;
+
+  margin: 0 auto 25px;
+
+  color: #bbdce3;
+
+  line-height: 1.6;
+}

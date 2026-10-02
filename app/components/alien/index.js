@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import "./index.css";
+
 const images = [
   "/images/little-alien-1.png",
   "/images/little-alien-2.png",

@@ -1,0 +1,23 @@
+.alien {
+  display: flex;
+
+  justify-content: center;
+
+  margin: 20px 0 28px;
+}
+
+.alienImage {
+  width: 150px;
+
+  height: auto;
+
+  filter:
+    drop-shadow(
+      0 0 12px
+        rgba(116, 255, 131, 0.6)
+    )
+    drop-shadow(
+      0 0 30px
+        rgba(116, 255, 131, 0.25)
+    );
+}

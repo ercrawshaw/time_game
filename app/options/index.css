@@ -1,0 +1,312 @@
+.optionsContent {
+  width: min(100%, 1100px);
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: clamp(16px, 2.2vw, 26px);
+}
+
+.optionsTitle {
+  text-align: center;
+
+  font-size: clamp(24px, 3.6vw, 40px);
+
+  letter-spacing: 4px;
+
+  margin: 6px 0 0;
+}
+
+.optionsIntro {
+  text-align: center;
+
+  color: #bbdce3;
+
+  font-size: 14px;
+
+  margin: 0;
+}
+
+.optionSection {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin: 0;
+}
+
+.optionSection h2 {
+  margin: 0;
+
+  color: white;
+
+  font-size: clamp(14px, 1.4vw, 17px);
+
+  letter-spacing: 1px;
+}
+
+.optionHint {
+  margin: -4px 0 0;
+
+  color: #9db5bb;
+
+  font-size: 12px;
+}
+
+/* OPTION GRIDS */
+
+.optionGrid {
+  display: grid;
+
+  gap: 12px;
+}
+
+.timeTypeGrid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.difficultyGrid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.timeLimitGrid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* INDIVIDUAL OPTIONS */
+
+.optionCard {
+  min-height: 86px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 12px 10px;
+
+  border: 2px solid #354b56;
+
+  border-radius: 12px;
+
+  background: #0d1a24;
+
+  color: #d8edf1;
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+  line-height: 1.3;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.optionCard:hover {
+  transform: translateY(-2px);
+
+  border-color: #62eaf8;
+
+  background: #16303d;
+
+  box-shadow:
+    0 0 12px
+      rgba(98, 234, 248, 0.3);
+}
+
+.optionCard:focus-visible {
+  outline: 3px solid #62eaf8;
+
+  outline-offset: 3px;
+}
+
+.optionCard.selected {
+  border-color: #54ff7c;
+
+  background: #12331f;
+
+  color: white;
+
+  box-shadow:
+    0 0 10px
+      rgba(84, 255, 124, 0.55),
+    inset 0 0 16px
+      rgba(84, 255, 124, 0.15);
+
+  transform: translateY(-2px);
+}
+
+.optionCard.selected::after {
+  content: "SELECTED";
+
+  color: #54ff7c;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+}
+
+.optionIcon {
+  color: #62eaf8;
+
+  font-size: 22px;
+
+  line-height: 1;
+}
+
+.optionExample {
+  color: #62eaf8;
+
+  font-family: monospace;
+
+  font-size: 16px;
+}
+
+.optionCard.selected .optionExample,
+.optionCard.selected .optionIcon {
+  color: #54ff7c;
+}
+
+/* LAUNCH */
+
+.launchArea {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 4px;
+}
+
+.selectionMessage {
+  min-height: 16px;
+
+  margin: 0;
+
+  color: #9db5bb;
+
+  font-size: 12px;
+}
+
+.startButton {
+  padding: 14px 44px;
+
+  font-size: 17px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 980px) {
+  .difficultyGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .optionsTitle {
+    font-size: 26px;
+
+    letter-spacing: 2px;
+  }
+
+  .optionsIntro {
+    font-size: 13px;
+  }
+
+  /* clock type: full width stacked rows */
+
+  .timeTypeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeTypeGrid .optionCard {
+    min-height: 58px;
+
+    flex-direction: row;
+
+    gap: 10px;
+  }
+
+  /* accuracy: compact label-left / example-right rows */
+
+  .difficultyGrid {
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+  }
+
+  .difficultyCard {
+    min-height: 50px;
+
+    flex-direction: row;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 14px;
+
+    text-align: left;
+  }
+
+  .difficultyCard .optionExample {
+    margin-left: auto;
+  }
+
+  /* time limit: stays three across */
+
+  .timeLimitGrid .optionCard {
+    min-height: 72px;
+
+    gap: 4px;
+
+    padding: 10px 6px;
+
+    font-size: 12px;
+  }
+
+  .timeLimitGrid .optionIcon {
+    font-size: 18px;
+  }
+
+  .optionCard.selected::after {
+    content: "\2713";
+
+    font-size: 13px;
+
+    letter-spacing: 0;
+  }
+
+  .startButton {
+    width: 100%;
+
+    padding: 16px 20px;
+  }
+}
+
+@media (max-width: 340px) {
+  .timeLimitGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

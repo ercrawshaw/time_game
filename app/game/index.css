@@ -1,0 +1,115 @@
+.gameTitle {
+  margin-bottom: 20px;
+
+  font-size: clamp(28px, 5vw, 46px);
+
+  text-align: center;
+}
+
+.clockTransition {
+  animation: questionBlink 0.45s ease-in-out;
+}
+
+@keyframes questionBlink {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ANSWERS */
+
+.answerGrid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 15px;
+
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  animation: questionBlink 0.75s ease-in-out;
+}
+
+.answerButton {
+  min-height: 75px;
+
+  padding: 15px 20px;
+
+  border: 3px solid #354b56;
+
+  border-radius: 15px;
+
+  background: #101f29;
+
+  color: #e6f7fa;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.answerButton:hover {
+  transform: translateY(-2px);
+
+  border-color: #62eaf8;
+
+  box-shadow:
+    0 0 14px
+      rgba(98, 234, 248, 0.25);
+}
+
+.wrongAttempt {
+  border-color: #56636a;
+  background: #202a30;
+  color: #7f8d92;
+  opacity: 0.55;
+  box-shadow: none;
+  transform: none;
+}
+
+/* RESULT MESSAGE */
+
+.resultArea {
+  margin-top: 30px;
+
+  text-align: center;
+}
+
+.wrongMessage {
+  color: #ff8c8c;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.endMissionArea {
+  margin-top: 26px;
+
+  text-align: center;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+  .answerGrid {
+    grid-template-columns: 1fr;
+  }
+}

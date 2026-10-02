@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Alien from "./components/alien";
 import Cockpit from "./components/cockpit";
 
+import "./home.css";
+
 export default function Home() {
   const router = useRouter();
 
