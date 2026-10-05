@@ -2,6 +2,7 @@ export function formatDigitalTime(
   hour,
   minute
 ) {
+  hour = Math.floor(Math.random() * 2) === 0 ? hour : hour + 12;
   return `${hour}:${minute
     .toString()
     .padStart(2, "0")}`;
