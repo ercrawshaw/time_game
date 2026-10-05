@@ -72,6 +72,6 @@ export const SCORE_THRESHOLDS = {
 export const UNLIMITED_THRESHOLDS = {
   nova: 10,
   orbit: 20,
-  cosmo: 35,
+  cosmo: 30,
   chronox: 50,
 };
